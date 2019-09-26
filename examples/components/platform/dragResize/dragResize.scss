@@ -1,0 +1,111 @@
+.vdr {
+    position: absolute;
+    box-sizing: border-box;
+    border: solid 1px transparent;
+    &.active:before{
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        outline: 1px dashed #565658;
+    }
+    &:hover{
+        border: dotted 1px #d6d6d6
+    }
+    &>.inside-container,&>.inside-container>div{
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+    .vdr-stick {
+        box-sizing: border-box;
+        position: absolute;
+        font-size: 1px;
+        background: #ffffff;
+        border: 1px solid #6c6c6c;
+        box-shadow: 0 0 2px #bbb;
+        &.not-resizable{
+            display: none;
+        }
+    }
+    &.inactive>.vdr-stick {
+        display: none;
+    }
+}
+.vdr-stick-tl, .vdr-stick-br {
+    cursor: nwse-resize;
+}
+.vdr-stick-tm, .vdr-stick-bm {
+    left: 50%;
+    cursor: ns-resize;
+}
+.vdr-stick-tr, .vdr-stick-bl {
+    cursor: nesw-resize;
+}
+.vdr-stick-ml, .vdr-stick-mr {
+    top: 50%;
+    cursor: ew-resize;
+}
+.vdr .set-icon{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background: #E0E0E0;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border-bottom-right-radius: 20px;
+    display: none;
+    i{
+        margin-left: 2px;
+        color: white;
+        font-size: 10px;
+    }
+    &:hover{
+        background: #5873D7;
+    }
+}
+.vdr:hover .set-icon{
+    display: inline-block;
+}
+
+.set-position{
+    padding: 8px;
+    span{
+        display: inline-block;
+        vertical-align: middle;
+    }
+    input{
+        width: 65px;
+        height: 32px;
+    }
+    p{
+        display: inline-block;
+        width: 80px;
+        height: 32px;
+        line-height: 32px;
+        padding-left: 4px;
+        color: #000;
+        border: solid 1px #AAAAAA;
+        position: relative;
+        top: 2px;
+    }
+    i{
+        margin-left: 10px;
+        color: #000;
+        font-size: 15px;
+        &:hover{
+            color: #76BCEF;
+        }
+    }
+    select{
+        width: 80px;
+        height: 32px;
+        position: relative;
+        top: 2px;
+    }
+}

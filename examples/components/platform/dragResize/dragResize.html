@@ -1,0 +1,56 @@
+<div class="vdr" 
+        :style="style" 
+        :class="active || isActive ? 'active' : 'inactive'" 
+        @mousedown="bodyDown($event)" 
+        @touchstart="bodyDown($event)"
+        >
+        <div class="inside-container">
+                <slot></slot>
+        </div>
+        <div v-for="stick in sticks" 
+                class="vdr-stick" 
+                :class="['vdr-stick-' + stick]" 
+                :style="vdrStick(stick)" 
+                @mousedown.stop.prevent="stickDown(stick, $event)" 
+                @touchstart.stop.prevent="stickDown(stick, $event)">
+        </div>
+        <div class="set-icon" @click="showSettingPanel = true">
+                <i class="iconfont icon-leixing"></i>
+        </div>
+        <Modal v-model="showSettingPanel" title="设置定位" width="260" :draggable="true" :scrollable="true">
+                <div class="set-position">
+                        <label>水平：</label>
+                        <select v-model="positionType" @change="changePositionType">
+                                <option :value="'left'">左距离</option>
+                                <option :value="'middle'">居中</option>
+                                <option :value="'right'">右距离</option>
+                        </select>
+                        <span v-if="positionType == 'left'"><input type="number" v-model="rawLeft" disabled><label>PX</label></span>
+                        <span v-if="positionType == 'middle'"></span>
+                        <span v-if="positionType == 'right'"><input type="number" v-model="rawRight" disabled><label>PX</label></span>
+                        <br/>
+                        <br/>
+                        <label>垂直：</label>
+                        <!-- <select v-model="verPosType" disabled>
+                                <option :value="'top'">顶部</option>
+                        </select> -->
+                        <p>顶部</p>
+                        <span v-if="verPosType == 'top'"><input type="number" v-model="rawTop" disabled><label>PX</label></span>
+                        <br/>
+                        <br/>
+                        <label>宽度：</label>
+                        <select v-model="widthType" @change="changeWidth">
+                                <option :value="'num'">数值</option>
+                                <option :value="'percent'">百分比</option>
+                        </select>
+                        <span v-if="widthType == 'num'"><input type="number" v-model="rawWidth" disabled><label>PX</label></span>
+                        <span v-if="widthType == 'percent'"><input type="number" v-model="perWidth" min="0" max="100"><label>%</label></span>
+                        <br/>
+                        <br/>
+                        <label>层级：</label>
+                        <span><input type="number" v-model="zIndex"></span>
+                        <i class="iconfont icon-lajitong" @click="deleteElement"></i>
+                </div>
+                <div slot="footer" style="height: 20px"></div>
+        </Modal>
+</div>
